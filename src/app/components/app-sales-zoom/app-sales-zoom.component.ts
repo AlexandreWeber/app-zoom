@@ -10,11 +10,13 @@ import { ZoomContentComponent } from '../zoom-content/zoom-content.component';
 
 export class AppSalesZoomComponent implements OnInit {
 
-  selectedItem: any = {};
+  selected: any = {};
   
   @Input() label: string;
   @Input() placeHolder: string;
   @Input() schema: string;
+  @Input() fieldCode: string;
+  @Input() fieldName: string;
   
   constructor(public modalController: ModalController) { }
 
@@ -23,9 +25,7 @@ export class AppSalesZoomComponent implements OnInit {
   async openModal () {
     const modal = await this.modalController.create({
       component: ZoomContentComponent,
-      componentProps: {
-        schema: this.schema
-      }
+      componentProps: { schema: this.schema, fieldCode: this.fieldCode, fieldName: this.fieldName, selected: this.selected }
     });
 
     modal.present();
@@ -33,10 +33,12 @@ export class AppSalesZoomComponent implements OnInit {
     const item = await modal.onDidDismiss();
 
     if (item && item.data) {
-      this.selectedItem = item.data.selectedItem;
+      this.selected = item.data.selectedItem;
     }
-    console.log(this.selectedItem);
-
   };
+
+  clearValue () {
+    this.selected = {};
+  }
 
 }

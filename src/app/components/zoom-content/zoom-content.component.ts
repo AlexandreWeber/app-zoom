@@ -10,33 +10,48 @@ import { ModalController, LoadingController, NavParams } from '@ionic/angular';
 export class ZoomContentComponent implements OnInit {
 
   list: Array<any> = [];
-  
   selectedItem: any;
-  
   searchText: '';
-
   start = 0;
-
   end = 10;
 
-  constructor(private modalCtrl: ModalController, public loadingController: LoadingController, public navParams: NavParams) { 
-    console.log(navParams.get('schema'))
+  schema: string;
+  fieldCode: '';
+  fieldName: '';
+
+  constructor(private modalCtrl: ModalController, 
+              public loadingController: LoadingController, 
+              public navParams: NavParams) { 
+  }
+  
+  async ngOnInit() {
+    this.schema = this.navParams.get('schema');
+    this.fieldCode = this.navParams.get('fieldCode');
+    this.fieldName = this.navParams.get('fieldName');
+    this.selectedItem = this.navParams.get('selected');
+    this.search();
+  }
+  
+  setItem () {
+    this.selectedItem = this.navParams.get('selected');
   }
 
-  ngOnInit() {
-    this.search();
+  selectRadio() {
+    console.log("teste");
   }
 
   closeModal () {
     this.modalCtrl.dismiss();
   }
 
-  seclectItem () {
-    console.log(this.selectedItem);
-
+  selectItem () {
     this.modalCtrl.dismiss({
       selectedItem: this.selectedItem
     })
+  }
+
+  changeRadio () {
+    console.log(this.selectedItem);
   }
 
   searchByName () {
@@ -60,14 +75,16 @@ export class ZoomContentComponent implements OnInit {
       for (let i = this.start; i < this.start + this.end; i++) {
         this.list.push({
           code: i,
-          name: `Condição de pagamento  ${i}`
+          name: `Tabela de preço  ${i}`
         })
       }
 
       this.start += 10;
+      
       if (event) {
         event.target.complete();
       }
+
       loading.dismiss();
     }, 1000)
 
