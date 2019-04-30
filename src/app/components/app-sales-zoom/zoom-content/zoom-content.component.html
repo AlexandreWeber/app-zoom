@@ -1,0 +1,54 @@
+<ion-header>
+    <ion-item>
+        <ion-button size="small" 
+                    slot="end" 
+                    (click)="closeModal()"
+                    color="primary">Fechar</ion-button>
+        <ion-input placeHolder="Pesquisar" 
+                   [(ngModel)]="searchText" 
+                   debounce="500" 
+                   (ionChange)="searchByName()"></ion-input>
+    </ion-item>
+</ion-header>
+
+<ion-content>
+
+    <ion-list>
+        <ion-radio-group [(ngModel)]="selectedItem">    
+            <ion-item *ngFor="let item of list"> 
+                <ion-grid>
+                    <ion-row>
+                        <div>
+                            Código: {{item.code}}
+                        </div>
+                    </ion-row>
+                    <ion-row>
+                        <div class="ion-text-wrap">
+                            Nome: {{item.name}}
+                        </div>
+                    </ion-row>
+                </ion-grid>
+                
+                <ion-radio slot="start" 
+                           [value]="item.code" 
+                           (ionSelect)="setSelected(item)">
+                </ion-radio>
+            </ion-item>
+        </ion-radio-group>
+    </ion-list>
+
+    <ion-infinite-scroll threshold="100px" 
+                         (ionInfinite)="search($event)">
+        <ion-infinite-scroll-content loadingSpinner="undefined" 
+                                     loadingText="">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+        <ion-button expand="block" 
+                    (click)="selectItem()" 
+                    color="primary">Selecionar</ion-button>
+    </ion-toolbar>
+</ion-footer>

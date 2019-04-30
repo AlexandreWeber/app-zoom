@@ -1,33 +1,20 @@
-import { IonicSelectableComponent } from 'ionic-selectable';
 import { Component } from '@angular/core';
 
-class Port {
-  public id: number;
-  public name: string;
-}
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+    selector: 'app-home',
+    templateUrl: 'home.page.html',
+    styleUrls: ['home.page.scss'],
 })
 
 export class HomePage {
-  ports: Port[];
-  port: Port;
+    priceTable: any = {};
+    payment: any = {};
 
-  constructor() {
-    this.ports = [
-      { id: 1, name: 'Tokai' },
-      { id: 2, name: 'Vladivostok' },
-      { id: 3, name: 'Navlakhi' }
-    ];
-  }
+    constructor() {}
 
-  portChange(event: {
-    component: IonicSelectableComponent,
-    value: any 
-  }) {
-    console.log('port:', event.value);
-  }
+    save() {
+        console.log(this.payment);
+        console.log(this.priceTable);
+    }
 }

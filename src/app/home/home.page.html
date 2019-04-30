@@ -1,8 +1,40 @@
-
 <ion-content>
 	<app-sales-zoom label="Tabela de Preço" 
 					placeHolder="Tabela de Preço" 
 					schema="priceTable"
-					fieldCode="nrTabPre"
-					fieldName="description"></app-sales-zoom>
+                    fieldCode="nrTabPre"
+                    (selectedItem)="priceTable = $event"
+                    fieldName="description">
+    </app-sales-zoom>
+
+    <app-sales-zoom label="Condição de Pagamento" 
+					placeHolder="Condição de Pagamento" 
+					schema="payment"
+                    fieldCode="code"
+                    (selectedItem)="payment = $event"
+                    fieldName="description">
+    </app-sales-zoom>
+    
+    <ion-item>
+        <ion-label position="floating">Desconto</ion-label>
+        <ion-input clearInput="true" placeholder="Desconto"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">Data de Entrega</ion-label>
+        <ion-input placeholder="Data de Entrega"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">Local de Entrega</ion-label>
+        <ion-input placeholder="Local de Entrega"></ion-input>
+    </ion-item>
+        
+
 </ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+      <ion-button expand="block" (click)="save()" color="primary">Salvar</ion-button>
+    </ion-toolbar>
+  </ion-footer>

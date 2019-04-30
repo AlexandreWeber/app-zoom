@@ -1,6 +1,21 @@
 <ion-item>
-  <ion-label position="floating">{{ label }}</ion-label>
-  <ion-icon slot="end" name="close" (click)="clearValue()"></ion-icon>
-  <ion-icon slot="end" class="margin-5" name="search" (click)="openModal()"></ion-icon>
-  <ion-input [(value)]="selected.name"  (click)="openModal()"></ion-input>
+    <ion-label (click)="openModal()" position="floating">{{ label }}</ion-label>
+    <ion-icon slot="end" 
+              size="small"
+              name="close" 
+              *ngIf="selected.code"
+              (click)="clearValue()">
+    </ion-icon>
+    <ion-icon slot="end" 
+              size="small"
+              class="margin-5" 
+              name="search"
+              (click)="openModal()">
+    </ion-icon>
+    <ion-input [(value)]="selected.name"
+               [readonly]="true"
+               [placeholder]="placeHolder"
+               (click)="openModal()">
+    </ion-input>
 </ion-item>
+
